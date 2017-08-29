@@ -1,21 +1,20 @@
 package br.edu.facear.model;
 
 public class Cliente {
-
 	private Integer id;
 	private String nome;
 	private String cpf;
 	private String email;
 	private String senha;
-
-	public Cliente(Integer id,String nome,String cpf,String email,String senha){
-		this.id = id;
-		this.nome = nome;
-		this.cpf= cpf;
+	
+	public Cliente(Integer id,String nome,String cpf, String email, String senha){
+		this.id=id;
+		this.nome=nome;
+		this.cpf=cpf;
 		this.email=email;
 		this.senha=senha;
 	}
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -55,6 +54,5 @@ public class Cliente {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-
 
 }

@@ -1,7 +1,6 @@
 package br.edu.facear.servlet;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,59 +15,38 @@ import br.edu.facear.service.AutenticarUsuarioService;
 /**
  * Servlet implementation class AutenticarUsuarioServlet
  */
-@WebServlet("/AutenticarUsuarioServlet")
+@WebServlet("/Login")
 public class AutenticarUsuarioServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AutenticarUsuarioServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("Acesso não permitido!!!!");
-		
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+ 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String email = request.getParameter("email");
 		String senha = request.getParameter("senha");
 		
-		AutenticarUsuarioService service = new AutenticarUsuarioService();
-		//Obter de Banco de Dados
-		Cliente c = null;
-		try {
-			c = service.autenticar(email, senha);
-		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		AutenticarUsuarioService usuario = new AutenticarUsuarioService();
 		
-		//Colocar na area de memoria sessao
+		
+		System.out.println(email+"   "+senha);
+		
+		//obter do banco de dados
+		Cliente c = usuario.autenticar(email, senha);
+		
+		//colocar na area de memoria da sessão
+		
 		request.setAttribute("cliente", c);
 		
-		String nextPage = "/index.html";
 		
-		if(c != null)
-			//nextPage = "/principal.html";
-		    nextPage = "/principal.jsp";
 		
-		RequestDispatcher rd = getServletContext().getRequestDispatcher(nextPage);
+		String nextPage = "/index2.html";
 		
+		if(c !=null)
+			nextPage = "/principal.jsp";
+		
+			
+		RequestDispatcher rd= getServletContext().getRequestDispatcher(nextPage);
 		rd.forward(request, response);
 		
-
-		//System.out.println("Ola :  " + usuario + "sua senha é = " +senha);
 	}
 
 }

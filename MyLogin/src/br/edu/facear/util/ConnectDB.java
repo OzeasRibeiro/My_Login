@@ -1,28 +1,48 @@
 package br.edu.facear.util;
 
-import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import javax.swing.JOptionPane;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectDB {
+	private static ConnectDB conexaoUtil;
 
-	private Connection con;
-	
-	private String driver;
-	private String url;
-	private String username;
-	private String password;
-	
-	public ConnectDB(){
-		driver ="com.microsoft.sqlserver.jdbc.SQLServerDriver";
-		url = "jdbc:sqlserver://localhost:1433;databaseName=MY_LOGIN";
-		username = "sa";
-		password = "693277268677";
+	public static ConnectDB getInstance() {
+		if (conexaoUtil == null) {
+			conexaoUtil = new ConnectDB();
+		}
+		return conexaoUtil;
 	}
-	public Connection getConnection() throws IOException,ClassNotFoundException,SQLException{
-		Class.forName(driver);
-		this.con = DriverManager.getConnection(url,username,password);
-		return this.con;
+
+	public Connection getConnection() throws ClassNotFoundException, SQLException {
+		Class.forName("com.mysql.jdbc.Driver");
+
+		String url = "jdbc:mysql://localhost/mybd";
+		String usuario = "root";
+		String senha = "";
+		Connection con = DriverManager.getConnection(url, usuario, senha);
+
+		return con;
 	}
+
+	public static void main(String[] args) {
+		try {
+			System.out.println(getInstance().getConnection());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 }

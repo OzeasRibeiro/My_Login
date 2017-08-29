@@ -8,16 +8,19 @@ import br.edu.facear.model.Cliente;
 
 public class AutenticarUsuarioService {
 	
-	public Cliente autenticar(String email, String senha) throws ClassNotFoundException, SQLException{
-		ClienteDAO dao = new ClienteDAO();
-		Cliente c = null;
+public Cliente autenticar(String email,String senha){
+	ClienteDAO dao = new ClienteDAO();
+	Cliente c = null;
+	try {
+		c =  dao.autenticar(email, senha);
+		
+	} catch (ClassNotFoundException | IOException | SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 	
-			try {
-					c = dao.autenticar(email, senha);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-        return c ;
-    }
+	return c;
+
+
+}
 }
