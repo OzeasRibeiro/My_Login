@@ -21,4 +21,9 @@ public class ClienteService {
 	public List<Cliente> listar() throws ClassNotFoundException, IOException, SQLException{
 		return dao.listar();
 	}
+	
+	public Cliente alterarCliente(Cliente cliente) throws ClassNotFoundException, SQLException{
+		return dao.ALTERAR_CLIENTE(cliente);
+		
+	}
 }

@@ -11,7 +11,7 @@
 
 <h4>Olá, ${cliente.nome}.</h4>
 
-<a href="/PrimeiraAulaJavaWeb/ListarClientesServlet">Listar</a>
+<a href="/MyLogin/ListarClientesServlet">Listar</a>
 
 </body>
 </html>

@@ -27,7 +27,7 @@
 				<td>${cliente.cpf}</td>
 				<td>${cliente.email}</td>
 				<td>
-				<a href="/PrimeiraAulaJavaWeb/ObterClienteServlet?id=">Exibir!</a>
+				<a href="/MyLogin/ObterClienteServlet?id=${cliente.id}">Exibir!</a>
 				</td>
 			</tr>
 			</c:forEach>
