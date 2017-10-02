@@ -26,8 +26,9 @@
 				<td>${cliente.nome}</td>
 				<td>${cliente.cpf}</td>
 				<td>${cliente.email}</td>
-				<td>
+				
 				<a href="/MyLogin/ObterClienteServlet?id=${cliente.id}">Exibir!</a>
+				<a href="/MyLogin/DeletarClienteServlet?id=${cliente.id}">Deletar!</a>
 				</td>
 			</tr>
 			</c:forEach>

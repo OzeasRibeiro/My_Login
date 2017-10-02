@@ -23,7 +23,10 @@ public class ClienteService {
 	}
 	
 	public Cliente alterarCliente(Cliente cliente) throws ClassNotFoundException, SQLException{
-		return dao.ALTERAR_CLIENTE(cliente);
-		
+		return dao.ALTERAR_CLIENTE(cliente);	
+	}
+	
+	public void deletarCliente(Integer id) throws ClassNotFoundException, IOException, SQLException{
+		dao.deletarCliente(id);
 	}
 }

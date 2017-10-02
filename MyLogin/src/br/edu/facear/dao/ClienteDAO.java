@@ -27,6 +27,8 @@ public class ClienteDAO extends GenericDAO {
 	
 	private String ALTERAR_CLIENTE = "UPDATE  CLIENTE SET nome=? , cpf = ?, email = ?, senha? WHERE id=?;";
 	
+	private String DELETAR_CLIENTE =  "DELETE FROM CLIENTE  WHERE id=?;";
+	
 	public Cliente autenticar(String email, String senha) throws ClassNotFoundException, IOException, SQLException{
 		Cliente c = null;
 		//abrir conecxao
@@ -85,12 +87,23 @@ public List<Cliente> listar() throws ClassNotFoundException,IOException,SQLExcep
 		ResultSet rs = ps.executeQuery();
 	
 			while(rs.next()){
-			//	System.out.println("entrou");
-			//	System.out.println(rs.getString("email"));
 				c = new Cliente(rs.getInt("id"),rs.getString("nome"),rs.getString("cpf"),rs.getString("email"),rs.getString("senha"));	
 			}
 		
 		return c;
+	}
+	
+	public void deletarCliente(Integer id)throws ClassNotFoundException, IOException, SQLException{
+		Cliente c = null;
+		//abrir conecxao
+		connect = ConnectDB.getInstance().getConnection();
+		
+		//prepare statement
+		ps = connect.prepareStatement(DELETAR_CLIENTE);
+		ps.setInt(1, id);
+		
+		ps.executeUpdate();
+		closeConnection();
 	}
 	
 	public Cliente ALTERAR_CLIENTE(Cliente c) throws SQLException, ClassNotFoundException{
@@ -107,7 +120,7 @@ public List<Cliente> listar() throws ClassNotFoundException,IOException,SQLExcep
 		ps.execute();
 		closeConnection();
 		
-		return c;
+		return null;
 		
 	}
 
